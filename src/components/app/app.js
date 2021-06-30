@@ -1,9 +1,28 @@
 import React from 'react';
 
-export default function App() {
+import Header from '../header';
+import RandomPlanet from '../random-planet';
+import ItemList from '../item-list';
+import PersonDetails from '../person-details';
+
+import './app.css';
+
+const App = () => {
   return (
     <div>
-      <h1>hi</h1>
+      <Header />
+      <RandomPlanet />
+
+      <div className='row mb2'>
+        <div className='col-md-6'>
+          <ItemList />
+        </div>
+        <div className='col-md-6'>
+          <PersonDetails />
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default App;
