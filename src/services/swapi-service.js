@@ -18,8 +18,9 @@ export default class SwapiService {
     const res = await this.getResource(`/planets/`);
     return res.results;
   }
-  getPlanets(id) {
-    return this.getResource(`/planets/${id}/`);
+  async getPlanet(id) {
+    const planet = await this.getResource(`/planets/${id}/`);
+    return this._transformPlanet(planet);
   }
   async getAllStarships() {
     const res = await this.getResource(`/startships/`);
@@ -28,8 +29,47 @@ export default class SwapiService {
   getStarship(id) {
     return this.getResource(`/startship/${id}/`);
   }
+  _extractId(item) {
+    const idRegExp = /\/([0-9]*)\/$/;
+    return item.url.match(idRegExp)[1];
+  }
+
+  _transformPlanet(planet) {
+    return {
+      id: this._extractId(planet),
+      name: planet.name,
+      population: planet.population,
+      climate: planet.climate,
+      gravity: planet.gravity,
+      rotationPeriod: planet.rotation_period,
+      diameter: planet.diameter,
+    };
+  }
+  _transformStarship(startship) {
+    return {
+      id: this._extractId(startship),
+      name: startship.name,
+      model: startship.model,
+      startshipClass: startship.startship_class,
+      manufacturer: startship.manufacturer,
+      costInCredits: startship.cost_in_credits,
+      length: startship.length,
+      crew: startship.crew,
+      cargoCapacity: startship.cargo_capasity,
+      passengers: startship.passengers,
+    };
+  }
+
+  _transformPeople(person) {
+    return {
+      id: this._extractId(person),
+      name: person.name,
+      eyeColor: person.eye_color,
+      gender: person.gender,
+      birthYear: person.birth_year,
+      hairColor: person.hair_color,
+      mass: person.mass,
+      height: person.height,
+    };
+  }
 }
-const swapi = new SwapiService();
-swapi.getPerson(3).then((people) => {
-  console.log(people.name);
-});
