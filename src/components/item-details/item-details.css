@@ -12,11 +12,11 @@
 }
 
 .item-details .list-group-item {
-  padding: 0.25rem;
+  padding: .25rem;
 }
 
-.item-details .list-group-item .term {
-  margin-right: 0.5rem;
+.item-details .list-group-item .term{
+  margin-right: .5rem;
 }
 
 .item-details button {
